@@ -41,6 +41,13 @@ def main():
                 print("Game Over!")
                 return
 
+        # Check for collisions between shots and asteroids
+        for asteroid in asteroidable:
+            for shot in updatable:  # Shots are in updatable group
+                if isinstance(shot, Shot) and asteroid.collides_with(shot):
+                    shot.kill()
+                    asteroid.split()
+
         for thing in drawable:
             thing.draw(screen)
 
